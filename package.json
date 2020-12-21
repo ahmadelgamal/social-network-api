@@ -1,0 +1,32 @@
+{
+  "name": "social-network-api",
+  "version": "1.0.0",
+  "description": "An API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ahmadelgamal/social-network-api.git"
+  },
+  "keywords": [
+    "social",
+    "network",
+    "api"
+  ],
+  "author": "Ahmad El Gamal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ahmadelgamal/social-network-api/issues"
+  },
+  "homepage": "https://github.com/ahmadelgamal/social-network-api#readme",
+  "dependencies": {
+    "date-format": "^3.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
