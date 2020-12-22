@@ -9,16 +9,16 @@ const PORT = process.env.PORT || 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(routes);
-
-mongoose.set('debug', true);
-
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/social-network-api', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
   useCreateIndex: true
 });
+
+mongoose.set('debug', true);
+
+app.use(routes);
 
 app.listen(PORT, () => console.log(`Connected on localhost:${PORT}`));
 
