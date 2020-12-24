@@ -2,13 +2,14 @@ const router = require('express').Router();
 
 const {
   readAllUsers,
-  readUser,
   createUser,
+  readUser,
   updateUser,
   deleteUser,
   createFriend,
   deleteFriend
-} = require('../../controllers/User-controller');
+} = require('../../controllers/user-controller');
+
 
 // Read ALL Users OR Create One User: /api/Users
 router.route('/')

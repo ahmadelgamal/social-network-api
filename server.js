@@ -1,28 +1,14 @@
 const express = require('express');
-const routes = require('./routes');
-const mongoose = require('mongoose');
-const db = mongoose.connection;
-
 const app = express();
+const routes = require('./routes');
 const PORT = process.env.PORT || 3001;
+const db = require('./config/connection'); // db = mogoose.connection
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/social-network-api', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true
-});
-
-mongoose.set('debug', true);
-
 app.use(routes);
 
-app.listen(PORT, () => console.log(`Connected on localhost:${PORT}`));
-
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', console.error.bind(console, 'Database connection error:'));
 db.once('open', function () {
-  console.log('Connection to db has been made.');
+  app.listen(PORT, () => console.log(`Database connected on localhost:${PORT}`));
 });
