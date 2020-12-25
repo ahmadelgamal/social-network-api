@@ -11,23 +11,23 @@ const {
 } = require('../../controllers/user-controller');
 
 
-// Read ALL Users OR Create One User: /api/Users
+// Read ALL Users OR Create One User:
+// /api/Users
 router.route('/')
   .get(readAllUsers)
   .post(createUser)
 
-// RUD One User by Id: /api/users/<userId>
+// RUD One User by its Id:
+// /api/users/:userId
 router.route('/:userId')
   .get(readUser)
   .put(updateUser)
   .delete(deleteUser);
 
-// // Create One Friend by User Id: /api/users/<userId>/friends
-// router.route('/:userId/friends')
-//   .post(createFriend);
-
-// // Delete One Friend by User Id and Friend Id: /api/users/<userId>/friends/<friendId>
-// router.route('/:userId/friends/:friendId')
-//   .delete(deleteFriend);
+// Create/Delete One Friend by User Id and Friend Id
+// /api/users/:userId/friends/:friendId
+router.route('/:userId/friends/:friendId')
+  .post(createFriend)
+  .delete(deleteFriend);
 
 module.exports = router;
