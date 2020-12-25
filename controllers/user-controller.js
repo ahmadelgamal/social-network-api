@@ -65,15 +65,40 @@ const userController = {
   deleteUser({ params }, res) {
     User.findOneAndDelete({ _id: params.userId })
       .then(dbUserData => res.json(dbUserData + ' User deleted successfully'))
-      .catch(err => res.json(err));
-  }
+      .catch(err => res.json(err))
+  },
 
-    // BONUS: Remove a user's associated thoughts when deleted
-    // deleteUser({ params }, res) {
-    //   User.findOneAndDelete({ _id: params.userId })
-    //     .then(dbUserData => res.json(dbUserData + ' User deleted successfully'))
-    //     .catch(err => res.json(err));
-    // }
+  // add a friend (by friendId) to user (by userId)
+  addFriend({ params, body }, res) {
+    User.findOneAndUpdate(
+      { _id: params.userId },
+      { $push: { friends: { _id: params.friendId } } },
+      { new: true },
+    )
+      .then(dbUserData => {
+        console.log(dbUserData);
+        if (!dbUserData) {
+          res.status(404).json({ message: 'No user found with this id!' });
+          return;
+        }
+        res.json(dbUserData);
+      })
+      .catch(err => res.json(err));
+  },
+
+  // // delete a friend by by userId and friendId
+  // removeFriend({ params }, res) {
+  //   User.findOneAndDelete({ _id: params.userId })
+  //     .then(dbUserData => res.json(dbUserData + ' User deleted successfully'))
+  //     .catch(err => res.json(err));
+  // },
+
+  // BONUS: Remove a user's associated thoughts when deleted
+  // deleteUser({ params }, res) {
+  //   User.findOneAndDelete({ _id: params.userId })
+  //     .then(dbUserData => res.json(dbUserData + ' User deleted successfully'))
+  //     .catch(err => res.json(err));
+  // }
 
 };
 

@@ -28,12 +28,12 @@ router.route('/:thoughtId')
 // POST to create a reaction stored in a single thought's reactions array field
 // /api/thoughts/:thoughtId/reactions
 router.route('/:thoughtId/reactions')
-  .post(createReaction);
+  // .post(createReaction);
 
 // Delete One Reaction by Thought Id and Reaction Id:
 // DELETE to pull and remove a reaction by the reaction's reactionId value
 // /api/thoughts/:thoughtId/reactions/:reactionId
 router.route('/:thoughtId/reactions/:reactionId')
-  .delete(deleteReaction);
+  // .delete(deleteReaction);
 
 module.exports = router;

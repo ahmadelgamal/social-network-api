@@ -1,6 +1,7 @@
 const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
+// I chose to use camelCase, not PascalCase, to follow mongoosejs.com docs
 const reactionSchema = new Schema(
   {
     reactionId: {
@@ -35,7 +36,7 @@ const thoughtSchema = new Schema(
       type: String,
       required: true,
       minLength: [1, 'You must enter thought text!'],
-      maxLength: [128, 'Thought text must not exceed 128 characters!']
+      maxLength: [280, 'Thought text must not exceed 128 characters!']
     },
     createdAt: {
       type: Date,

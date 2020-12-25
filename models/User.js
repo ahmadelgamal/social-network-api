@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-// I chose to use camelCase instead of PascalCase in order to follow mongoosejs.com docs
+// I chose to use camelCase, not PascalCase, to follow mongoosejs.com docs
 const userSchema = new Schema(
   {
     username: {
