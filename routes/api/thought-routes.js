@@ -34,6 +34,6 @@ router.route('/:thoughtId/reactions')
 // DELETE to pull and remove a reaction by the reaction's reactionId value
 // /api/thoughts/:thoughtId/reactions/:reactionId
 router.route('/:thoughtId/reactions/:reactionId')
-  // .delete(deleteReaction);
+  .delete(deleteReaction);
 
 module.exports = router;
