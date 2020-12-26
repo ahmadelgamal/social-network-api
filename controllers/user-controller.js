@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Thought } = require('../models');
 
 const userController = {
   // read (GET) all users
@@ -15,7 +15,6 @@ const userController = {
       .select('-__v')
       .sort({ _id: -1 })
       .then(dbUserData => {
-        console.log(dbUserData);
         if (dbUserData.length === 0) return res.status(404).json({ message: 'No users found in database!' })
         res.json(dbUserData)
       })
@@ -65,16 +64,45 @@ const userController = {
       .catch(err => res.json(err));
   },
 
-  // TODO: delete associated thoughts
   // delete a user by its id
+  // also deletes associated thoughts
   deleteUser({ params }, res) {
-    User.findOneAndDelete({ _id: params.userId })
+    // initializes userName to be available in .then
+    let userName;
+
+    User.findOne({ _id: params.userId })
       .then(dbUserData => {
-        if (!dbUserData) return res.status(
-          404).json({ message: 'No user found with this Id' })
-        res.json({ message: 'User and associated thoughts deleted successfully' })
+        if (!dbUserData) return res.status(404).json({ message: 'No user found with this id!' })
+
+        userName = dbUserData.username;
+        Thought.find({ username: dbUserData.username })
+          .then(dbThoughtData => {
+            if (!dbThoughtData) return res.status(404).json({ message: 'No thought(s) found associated with this username!' })
+
+            if (dbThoughtData.length > 1) {
+              Thought.deleteMany({ username: userName })
+                .then(dbThoughtsData => {
+                  return res.json({ message: 'Thoughts associated with user deleted successfully!' })
+                })
+            }
+            else {
+              Thought.deleteOne({ username: userName })
+                .then(dbThoughtData => {
+                  return res.json({ message: 'Thought associated with user deleted successfully!' })
+                })
+            }
+          })
       })
-      .catch(err => res.json(err))
+      .then((dbUserData) => {
+        User.findOneAndDelete({ _id: params.userId })
+          .then(dbUserData => {
+            if (!dbUserData) return res.status(
+              404).json({ message: 'No user found with this Id' })
+            res.json({ message: 'User and associated thought(s) deleted successfully' })
+          })
+          .catch(err => res.json(err));
+      })
+      .catch(err => res.json(err));
   },
 
   // add a friend (by friendId) to user (by userId)
@@ -85,7 +113,6 @@ const userController = {
       { new: true, runValidators: true },
     )
       .then(dbUserData => {
-        console.log(dbUserData + ' Friend added successfully!');
         if (!dbUserData) {
           res.status(404).json({ message: 'No user found with this id!' });
           return;
@@ -103,7 +130,6 @@ const userController = {
       { new: true, runValidators: true },
     )
       .then(dbUserData => {
-        console.log(dbUserData + ' Friend removed successfully!');
         if (!dbUserData) {
           res.status(404).json({ message: 'No user found with this id!' });
           return;
