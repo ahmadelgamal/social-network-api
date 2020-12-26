@@ -77,14 +77,17 @@ const userController = {
                 .then(dbThoughtsDeleteData => {
                   return;
                 })
+                .catch(err => res.json(err));
             }
             else {
               Thought.deleteOne({ username: dbUserData.username })
                 .then(dbThoughtDeleteData => {
                   return;
                 })
+                .catch(err => res.json(err));
             }
           })
+          .catch(err => res.json(err));
       })
       .then((dbUserData) => {
         User.findOneAndDelete({ _id: params.userId })
@@ -93,6 +96,7 @@ const userController = {
               404).json({ message: 'No user found with this Id' })
             res.json({ message: 'User and associated thought(s) deleted successfully' })
           })
+          .catch(err => res.json(err));
       })
       .catch(err => res.json(err));
   },

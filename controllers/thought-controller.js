@@ -39,7 +39,9 @@ const thoughtController = {
               .then(dbAddedThoughtData => {
                 return;
               })
+              .catch(err => res.json(err));
           })
+          .catch(err => res.json(err));
       })
       .catch(err => res.json(err));
   },
