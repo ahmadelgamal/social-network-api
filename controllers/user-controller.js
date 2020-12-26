@@ -56,7 +56,10 @@ const userController = {
   // update a user by its id
   updateUser({ params, body }, res) {
     User.findOneAndUpdate(
-      { _id: params.userId }, body, { new: true, runValidators: true })
+      { _id: params.userId },
+      body,
+      { new: true, runValidators: true }
+    )
       .then(dbUserData => {
         if (!dbUserData) return res.status(404).json({ message: 'No user found with this id!' })
         res.json(dbUserData);
@@ -67,27 +70,23 @@ const userController = {
   // delete a user by its id
   // also deletes associated thoughts
   deleteUser({ params }, res) {
-    // initializes userName to be available in .then
-    let userName;
-
     User.findOne({ _id: params.userId })
       .then(dbUserData => {
         if (!dbUserData) return res.status(404).json({ message: 'No user found with this id!' })
 
-        userName = dbUserData.username;
         Thought.find({ username: dbUserData.username })
           .then(dbThoughtData => {
             if (!dbThoughtData) return res.status(404).json({ message: 'No thought(s) found associated with this username!' })
 
             if (dbThoughtData.length > 1) {
-              Thought.deleteMany({ username: userName })
+              Thought.deleteMany({ username: dbUserData.username })
                 .then(dbThoughtsDeleteData => {
                   // return res.json({ message: 'Thoughts associated with user deleted successfully!' })
                   return;
                 })
             }
             else {
-              Thought.deleteOne({ username: userName })
+              Thought.deleteOne({ username: dbUserData.username })
                 .then(dbThoughtDeleteData => {
                   // return res.json({ message: 'Thought associated with user deleted successfully!' })
                   return;
@@ -97,12 +96,11 @@ const userController = {
       })
       .then((dbUserData) => {
         User.findOneAndDelete({ _id: params.userId })
-          .then(dbUserData => {
-            if (!dbUserData) return res.status(
+          .then(dbUserDeleteData => {
+            if (!dbUserDeleteData) return res.status(
               404).json({ message: 'No user found with this Id' })
             res.json({ message: 'User and associated thought(s) deleted successfully' })
           })
-          .catch(err => res.json(err));
       })
       .catch(err => res.json(err));
   },

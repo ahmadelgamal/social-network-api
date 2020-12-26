@@ -20,29 +20,25 @@ const thoughtController = {
       });
   },
 
-  // create thought
+  // create thought and associate it to user automatically
   // duplicate thoughts are alllowed on purpose
   createThought({ body }, res) {
-    Thought.create(body)
-      .then(dbThoughtData => {
-        res.json(dbThoughtData)
+    User.findOne({ _id: body.userId })
+      .then(dbUserData => {
+        if (!dbUserData) return res.status(404).json({ message: 'No user found with this id!' });
 
-        User.findOneAndUpdate(
-          { _id: body.userId },
-          { $addToSet: { thoughts: dbThoughtData } },
-          { new: true, runValidators: true },
-        )
-          .then(dbUserData => {
-            if (!dbUserData) {
-              res.status(404).json({ message: 'No user found with this id!' });
-              return;
-            }
-            res.json(dbUserData);
+        Thought.create(body)
+          .then(dbThoughtData => {
+            res.json(dbThoughtData);
+
+            User.findOneAndUpdate(
+              { _id: body.userId },
+              { $addToSet: { thoughts: dbThoughtData._id } },
+              { new: true, runValidators: true },
+            )
           })
-          .catch(err => res.json(err));
       })
       .catch(err => res.json(err));
-
   },
 
   // read thought by id
@@ -81,18 +77,10 @@ const thoughtController = {
         res.json({ message: 'Thought deleted successfully!' })
 
         User.findOneAndUpdate(
-          { _id: body.userId },
+          { _id: dbThoughtData.userId },
           { $pull: { thoughts: dbThoughtData } },
           { new: true, runValidators: true },
         )
-          .then(dbUserData => {
-            if (!dbUserData) {
-              res.status(404).json({ message: 'No user found with this id!' });
-              return;
-            }
-            res.json(dbUserData);
-          })
-          .catch(err => res.json(err));
       })
       .catch(err => res.json(err));
   }
