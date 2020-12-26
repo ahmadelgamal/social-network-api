@@ -81,14 +81,16 @@ const userController = {
 
             if (dbThoughtData.length > 1) {
               Thought.deleteMany({ username: userName })
-                .then(dbThoughtsData => {
-                  return res.json({ message: 'Thoughts associated with user deleted successfully!' })
+                .then(dbThoughtsDeleteData => {
+                  // return res.json({ message: 'Thoughts associated with user deleted successfully!' })
+                  return;
                 })
             }
             else {
               Thought.deleteOne({ username: userName })
-                .then(dbThoughtData => {
-                  return res.json({ message: 'Thought associated with user deleted successfully!' })
+                .then(dbThoughtDeleteData => {
+                  // return res.json({ message: 'Thought associated with user deleted successfully!' })
+                  return;
                 })
             }
           })
