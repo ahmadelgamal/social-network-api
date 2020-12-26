@@ -18,10 +18,7 @@ const userController = {
         if (dbUserData.length === 0) return res.status(404).json({ message: 'No users found in database!' })
         res.json(dbUserData)
       })
-      .catch(err => {
-        console.log(err);
-        res.sendStatus(400);
-      });
+      .catch(err => res.json(err));
   },
 
   // create (POST) a new user
@@ -47,10 +44,7 @@ const userController = {
         if (!dbUserData) return res.status(404).json({ message: 'No user found with this id' })
         res.json(dbUserData)
       })
-      .catch(err => {
-        console.log(err);
-        res.sendStatus(400);
-      });
+      .catch(err => res.json(err));
   },
 
   // update a user by its id
@@ -81,14 +75,12 @@ const userController = {
             if (dbThoughtData.length > 1) {
               Thought.deleteMany({ username: dbUserData.username })
                 .then(dbThoughtsDeleteData => {
-                  // return res.json({ message: 'Thoughts associated with user deleted successfully!' })
                   return;
                 })
             }
             else {
               Thought.deleteOne({ username: dbUserData.username })
                 .then(dbThoughtDeleteData => {
-                  // return res.json({ message: 'Thought associated with user deleted successfully!' })
                   return;
                 })
             }

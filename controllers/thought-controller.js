@@ -34,8 +34,11 @@ const thoughtController = {
             User.findOneAndUpdate(
               { _id: body.userId },
               { $addToSet: { thoughts: dbThoughtData._id } },
-              { new: true, runValidators: true },
+              { new: true, runValidators: true }
             )
+              .then(dbAddedThoughtData => {
+                return;
+              })
           })
       })
       .catch(err => res.json(err));
