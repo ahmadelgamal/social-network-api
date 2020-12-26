@@ -20,7 +20,7 @@ const thoughtController = {
   // create thought
   createThought({ body }, res) {
     Thought.create(body)
-      .then(dbThoughtData => res.json(dbThoughtData))
+      .then(dbThoughtData => res.json(dbThoughtData + ' Thought created successfully!'))
       .catch(err => res.json(err));
   },
 
@@ -47,7 +47,7 @@ const thoughtController = {
           res.status(404).json({ message: 'No thought found with this id!' });
           return;
         }
-        res.json(dbThoughtData);
+        res.json(dbThoughtData + ' Thought updated successfully!');
       })
       .catch(err => res.json(err));
   },
@@ -55,7 +55,10 @@ const thoughtController = {
   // delete thought by id
   deleteThought({ params }, res) {
     Thought.findOneAndDelete({ _id: params.thoughtId })
-      .then(dbThoughtData => res.json(dbThoughtData))
+      .then(dbThoughtData => {
+        if(!dbThoughtData) return res.json('No thought found with this Id!');
+        res.json(dbThoughtData + ' Thought deleted successfully!')
+      })
       .catch(err => res.json(err));
   }
 };

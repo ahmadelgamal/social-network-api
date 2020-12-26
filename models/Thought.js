@@ -35,8 +35,8 @@ const thoughtSchema = new Schema(
     thoughtText: {
       type: String,
       required: true,
-      minLength: [1, 'You must enter thought text!'],
-      maxLength: [280, 'Thought text must not exceed 128 characters!']
+      // no need to set minLength of 1 because it is a required field anyways
+      maxLength: [280, 'Thought text must not exceed 280 characters!']
     },
     createdAt: {
       type: Date,
