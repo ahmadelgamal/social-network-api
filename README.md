@@ -58,6 +58,7 @@ https://github.com/ahmadelgamal/social-network-api
 1. Go to the command line (if you're not there already).
 1. Change the directory to `social-network-api`.
 1. Run: `npm install`.
+1. Install `MongoDB` on your local machine.
 
 ## Usage
 
@@ -65,6 +66,8 @@ https://github.com/ahmadelgamal/social-network-api
 1. Run `npm start` (or `npm run server` to keep the server running using `nodemon`).
 1. Open an API Client, such as `Insomnia Core` or `Postman`.
 1. Start making API requests.
+
+### Optional
 1. Open a `MongoDB` GUI, such as `MongoDB Compass`.
 1. Connect to the database (db): `mongodb://localhost:social-network-api`
 1. Monitor the updates to the db in response to API requests.
@@ -75,7 +78,7 @@ https://github.com/ahmadelgamal/social-network-api
    1. `GET` all users
    1. `GET` a single user by its `_id` and populated thought and friend data
    1. `POST` a new user:<br />
-      `// sample data`<br />
+      `// example data`<br />
       `{`<br />
       &nbsp;&nbsp;&nbsp;&nbsp;`"username": "Muhammad",`<br />
       &nbsp;&nbsp;&nbsp;&nbsp;`"email": "muhammad@gmail.com"`<br />
