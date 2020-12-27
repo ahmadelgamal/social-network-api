@@ -65,11 +65,11 @@ https://github.com/ahmadelgamal/social-network-api
 1. Go to the command line.
 1. Run `npm start` (or `npm run server` to keep the server running using `nodemon`).
 1. Open an API Client, such as `Insomnia Core` or `Postman`.
-1. Start making API requests.
+1. Start making API requests at `localhost:3001` followed by an API route from the [list below](#API-Routes).
 
 ### Optional
 1. Open a `MongoDB` GUI, such as `MongoDB Compass`.
-1. Connect to the database (db): `mongodb://localhost:social-network-api`
+1. Connect to the database (db): `mongodb://localhost:social-network-api`.
 1. Monitor the updates to the db in response to API requests.
 
 ### API Routes
