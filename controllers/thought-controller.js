@@ -112,8 +112,11 @@ const thoughtController = {
       { new: true, runValidators: true },
     )
       .then(dbReactionData => {
+        console.log('==========');
+        console.log(dbReactionData);
+        console.log('==========');
         if (!dbReactionData) return res.status(404).json({ message: 'No thought or reaction found with this id!' });
-        res.json(dbReactionData);
+        res.json({ message: 'Reaction deleted successfully!' });
       })
       .catch(err => res.json(err));
   },
