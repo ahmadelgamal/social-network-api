@@ -37,7 +37,7 @@ An API for a social network web application where users can share their thoughts
 
 ### Deployment URL
 
-This is a server-side application. It is currently not deployed online.
+This is a back-end (server-side) application. It is currently not deployed online.
 
 ### Repo URL
 
@@ -47,9 +47,14 @@ https://github.com/ahmadelgamal/social-network-api
 
 1. NoSQL Database
 1. REST API
-1. Server-side application.
+1. Back-end (server-side) application.
 1. Can handle large amounts of unstructured data.
 1. Data responses are output in JSON format when requests are sent through API routes.
+
+## Pre-requisites
+1. Install `Node.js` on your local machine.
+1. Install `MongoDB` on your local machine.
+1. Install an API Client, such as `Insomnia Core` or `Postman`.
 
 ## Installation
 
@@ -57,17 +62,18 @@ https://github.com/ahmadelgamal/social-network-api
 1. If you downloaded the zipped version of this repo, then unzip it in the desired directory.
 1. Go to the command line (if you're not there already).
 1. Change the directory to `social-network-api`.
-1. Run: `npm install`.
-1. Install `MongoDB` on your local machine.
+1. Run: `npm install`. (This will install `express.js` and `mongoose.js` for production, as well as `nodemon.js` for development.)
 
 ## Usage
 
 1. Go to the command line.
+1. Navigate to the `social-network-api` directory.
 1. Run `npm start` (or `npm run server` to keep the server running using `nodemon`).
-1. Open an API Client, such as `Insomnia Core` or `Postman`.
+1. Open the API Client.
 1. Start making API requests at `localhost:3001` followed by an API route from the [list below](#API-Routes).
 
 ### Optional
+
 1. Open a `MongoDB` GUI, such as `MongoDB Compass`.
 1. Connect to the database (db): `mongodb://localhost:social-network-api`.
 1. Monitor the updates to the db in response to API requests.
@@ -108,9 +114,9 @@ https://github.com/ahmadelgamal/social-network-api
 
 ![Screenshot / Gif Animation](./assets/screenshot.gif)
 
-### Video
+### Video Demo
 
-[Video Demo](https://youtu.be/??)
+[Video Link](https://youtu.be/??)
 
 ## Technologies Used
 
@@ -119,6 +125,7 @@ https://github.com/ahmadelgamal/social-network-api
 1. Express.js
 1. MongoDB
 1. Mongoose.js
+1. Nodemon (for development only)
 
 ## Questions
 
