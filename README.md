@@ -90,7 +90,7 @@ https://github.com/ahmadelgamal/social-network-api
       &nbsp;&nbsp;&nbsp;&nbsp;`"email": "muhammad@gmail.com"`<br />
       `}`
    1. `PUT` to update a user by its `_id`
-   1. `DELETE` to remove user by its `_id`
+   1. `DELETE` to remove a user by its `_id`
 1. `/api/users/:userId/friends/:friendId`
    1. `POST` to add a new friend to a user's friend list
    1. `DELETE` to remove a friend from a user's friend list
